@@ -1,9 +1,0 @@
-C:\Users\AllanB\Desktop\Sottelli.Caixa\Sottelli.Caixa\bin\Debug\Sottelli.Caixa.exe.config
-C:\Users\AllanB\Desktop\Sottelli.Caixa\Sottelli.Caixa\bin\Debug\Sottelli.Caixa.exe
-C:\Users\AllanB\Desktop\Sottelli.Caixa\Sottelli.Caixa\bin\Debug\Sottelli.Caixa.pdb
-C:\Users\AllanB\Desktop\Sottelli.Caixa\Sottelli.Caixa\obj\Debug\Sottelli.Caixa.csprojResolveAssemblyReference.cache
-C:\Users\AllanB\Desktop\Sottelli.Caixa\Sottelli.Caixa\obj\Debug\Sottelli.Caixa.exe
-C:\Users\AllanB\Desktop\Sottelli.Caixa\Sottelli.Caixa\obj\Debug\Sottelli.Caixa.pdb
-D:\Repositories\desafios\CaixaEletronico\Sottelli.Caixa\bin\Debug\Sottelli.Caixa.exe.config
-D:\Repositories\desafios\CaixaEletronico\Sottelli.Caixa\obj\Debug\Sottelli.Caixa.exe
-D:\Repositories\desafios\CaixaEletronico\Sottelli.Caixa\obj\Debug\Sottelli.Caixa.pdb
