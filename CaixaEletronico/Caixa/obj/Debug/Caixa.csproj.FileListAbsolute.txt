@@ -1,0 +1,5 @@
+D:\Repositories\desafios\CaixaEletronico\Caixa\bin\Debug\Sottelli.Caixa.exe.config
+D:\Repositories\desafios\CaixaEletronico\Caixa\obj\Debug\Sottelli.Caixa.exe
+D:\Repositories\desafios\CaixaEletronico\Caixa\obj\Debug\Sottelli.Caixa.pdb
+D:\Repositories\desafios\CaixaEletronico\Caixa\bin\Debug\Sottelli.Caixa.exe
+D:\Repositories\desafios\CaixaEletronico\Caixa\bin\Debug\Sottelli.Caixa.pdb
