@@ -1,0 +1,57 @@
+﻿
+@{
+  ViewBag.Title = "Pizzaria - Confirmação Pedido";
+}
+
+<h1>Confirmação Pedido</h1>
+
+<p class="alert alert-success">
+    <strong>Yeeeey!</strong><br />
+    Pedido realizado com sucesso, agora só matar a fome!
+</p>
+
+<div class="row">
+    <p>
+        <strong>Pizzas:</strong>
+        <ul class="pizzas"></ul>
+    </p>
+    <p>
+        <strong>Taxa Entrega:</strong> R$ <span class="taxa-entrega">0.00</span>
+    </p>
+    <p>
+        <strong>Pizzas:</strong> R$ <span class="subtotal">0.00</span>
+    </p>
+    <p>
+        <strong>Total:</strong> R$ <span class="total">0.00</span>
+    </p>
+</div>
+
+@section scripts {
+    <script>
+        $(function () {
+            var pedido = JSON.parse(window.sessionStorage.getItem('PedidoConfirmado'));
+            if (pedido) {
+
+                var total = pedido.Total || 0;
+                var taxaEntrega = pedido.TaxaEntrega || 0;
+                var subtotal = total - taxaEntrega;
+
+                $('.taxa-entrega').text(taxaEntrega.toFixed(2));
+                $('.total').text(total.toFixed(2));
+                $('.subtotal').text(subtotal.toFixed(2));
+
+                const pizzas = $('.pizzas');
+                pizzas.empty();
+
+                pedido.Pizzas.forEach(function (pizza) {
+                    const li = '<li>' + pizza.Nome + '</li>';
+                    $(pizzas[0]).append(li);
+                });
+            } else {
+                window.location = '@Url.Action("Index", "Home")';
+            }
+
+            window.sessionStorage.clear();
+        });
+    </script>
+}

@@ -1,0 +1,301 @@
+﻿@{
+  ViewBag.Title = "Pizzaria - Pedido";
+}
+
+<style>
+    #carrinho-itens li {
+        margin-bottom: 1rem;
+    }
+
+    #carrinho-itens button {
+        margin-left: 1rem;
+    }
+</style>
+
+<div class="row">
+    <div class="col-md-9">
+        <h2>Faça seu pedido!</h2>
+        <p>
+            <h4>Promoções:</h4>
+            <strong>Vegetariana -</strong> Se a pizza não contiver calabresa, pepperoni e presunto ganha 10% de desconto.<br />
+            <strong>Carnívora -</strong> Se a pizza contiver os 3 tipos de carne (Pepperoni, Presunto e Calabresa) ganha 20% de desconto.<br />
+            <strong>Taxa de entrega -</strong> Se o pedido for feito na segunda, terça ou quarta feira a taxa de entrega é grátis.<br />
+            <strong>Grande Pedido -</strong> No pedido de 4 pizzas juntas a pizza com menor valor é grátis.
+        </p>
+    </div>
+    <div class="col-md-3">
+        <h2>Carrinho</h2>
+        <ul id="carrinho-itens"></ul>
+        <p>
+            <strong>Total pedido:</strong> R$ <span id="carrinho-totalpedido">0.00</span>
+        </p>
+        <button class="carrinho-finalizar btn btn-success btn-block" disabled="disabled">
+            <span class="glyphicon glyphicon glyphicon-ok" aria-hidden="true"></span> Finalizar compra
+        </button>
+    </div>
+</div>
+
+<div class="row">
+    @foreach (var pizza in ViewBag.Pizzas)
+    {
+    <div class="col-md-12">
+        <div class="row">
+            <h3 id="pizza-@pizza.Nome" class="nome">@pizza.Nome</h3>
+            <h4 style="display: inline;">
+                R$ <span id="ValorTotal-@pizza.Nome" class="total">@pizza.Valor.ToString("n2")</span>
+            </h4>
+            <button class="pizza-adicionar btn btn-primary btn-sm">
+                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Adicionar
+            </button>
+
+            <br /><br />
+
+            <div class="@pizza.Nome-ingredientes">
+                <div class="row ingredientes">
+                    @foreach (var ingrediente in pizza.Ingredientes)
+                    {
+                        <div class="col-md-4">
+                            <div class="input-group form-group form-inline">
+                                <span class="input-group-addon">
+                                    <input type="checkbox" checked="checked" ingrediente-nome="@ingrediente.Nome" ingrediente-pizza-nome="@pizza.Nome.Replace(" ", "")-@ingrediente.Nome.Replace(" ", "")" value="@ingrediente.Valor.ToString("n2").Replace(",", ".")" />
+                                </span>
+                                <input type="text" class="form-control" ingrediente-preco="@ingrediente.Valor.ToString("n2").Replace(",", ".")" value="@ingrediente.Nome" readonly>
+                            </div>
+                        </div>
+                    }
+                </div>
+
+                <div class="row @pizza.Nome-ingredientes-adicionais">
+                    <h4>Adicionais: </h4>
+                    @foreach (var ingrediente in pizza.IngredientesAdicionais)
+                    {
+                    <div class="col-md-4">
+                        <div class="input-group form-group form-inline">
+                            <span class="input-group-addon">
+                                <input type="checkbox" ingrediente-nome="@ingrediente.Nome" ingrediente-pizza-nome="@pizza.Nome.Replace(" ", "")-@ingrediente.Nome.Replace(" ", "")" value="@ingrediente.Valor.ToString("n2").Replace(",", ".")"/>
+                            </span>
+                            <input type="text" class="form-control" value="@ingrediente.Nome - R$ @ingrediente.Valor.ToString("n2")" ingrediente-preco="@ingrediente.Valor.ToString("n2").Replace(",", ".")" readonly>
+                        </div>
+                    </div>
+                    }
+                </div>
+            </div>
+        </div>
+        <hr />
+    </div>
+    }
+</div>
+
+@section scripts {
+    <script>
+        function Ingrediente(nome, valor) {
+            return {
+                nome: nome,
+                valor: valor
+            }
+        };
+
+        function Pizza(nome, valor, ingredientes) {
+            return {
+                nome: nome,
+                valor: valor,
+                ingredientes: ingredientes
+            }
+        };
+
+        function Pedido(pizzas, total) {
+            return {
+                pizzas: pizzas,
+                total: total
+            }
+        };
+
+        function calculaValorTotal(pizzas) {
+            const total = pizzas.reduce(function (anterior, atual) {
+                return anterior + parseFloat(atual.valor) || 0.00;
+            }, 0.00);
+
+            validaAcaoFinalizarCompra(total);
+
+            return total;
+        }
+
+        function eventoRemovePizza() {
+            $('.pizza-remover').on("click",
+                function () {
+                    const pizzaNome = $(this).attr('pizza-nome');
+                    const pedido = JSON.parse(window.sessionStorage.getItem('Pedido'));
+
+                    if (pedido && pedido.pizzas.length > 0) {
+                        const index = pedido.pizzas.findIndex(o => o.nome === pizzaNome);
+                        pedido.pizzas.splice(index, 1);
+
+                        const total = calculaValorTotal(pedido.pizzas);
+
+                        pedido.total = total.toFixed(2);
+                        $('#carrinho-totalpedido').text(total.toFixed(2));
+
+                        window.sessionStorage.setItem('Pedido', JSON.stringify(pedido));
+
+                        renderizaCarrinho(pedido.pizzas);
+                    }
+                });
+        }
+
+        function renderizaCarrinho(pizzas) {
+            const carrinho = $('#carrinho-itens');
+            carrinho.empty();
+
+            pizzas.forEach(function (pizza) {
+                const li = '<li>' +
+                    pizza.nome +
+                    ' - R$ ' +
+                    pizza.valor.toFixed(2) +
+                    '<button class="pizza-remover btn btn-danger btn-sm" pizza-nome="' +
+                    pizza.nome +
+                    '"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button></li>';
+                $(carrinho[0]).append(li);
+            });
+
+            eventoRemovePizza();
+        }
+
+        function validaAcaoFinalizarCompra(total) {
+            if (total === 0) {
+                $('.carrinho-finalizar').prop("disabled", true);
+            } else {
+                $('.carrinho-finalizar').prop("disabled", false);
+            }
+        }
+
+        function limpaIngredientesAdicionais(obj) {
+            const pizzaIngredientesAdicionais = Array.from(obj);
+            pizzaIngredientesAdicionais.forEach(function(obj) {
+                $(obj).prop('checked', false);
+            });
+        }
+        
+        function setaIngredientes(obj) {
+            const pizzaIngredientesAdicionais = Array.from(obj);
+
+            pizzaIngredientesAdicionais.forEach(function (obj) {
+                $(obj).prop('checked', true);
+            });
+        }
+
+        function massaSelecionada(semMassa) {
+            if (semMassa === 0) {
+                swal({
+                    type: 'warning',
+                    title: 'Oops...',
+                    text: 'É necessário escolher pelo menos um tipo de massa!'
+                });
+
+                return false;
+            }
+            else if (semMassa > 1) {
+                swal({
+                    type: 'warning',
+                    title: 'Oops...',
+                    text: 'Só é possível escolher apenas 1 tipo de massa!'
+                });
+
+                return false;
+            }
+
+            return true;
+        }
+
+
+        $('.pizza-adicionar').on("click", function () {
+            const pizzaNome = $(this).siblings('.nome').text();
+            const pizzaIngredientes = [];
+            const inputPizzaIngredientes = Array.from($('.' + pizzaNome + '-ingredientes').find('input:checked'));
+
+            let semMassa = 0;
+            const pizzaTotal = inputPizzaIngredientes.reduce(function (anterior, atual) {
+                
+                if ($(atual).attr('ingrediente-pizza-nome').toLowerCase().indexOf("massa") > 0) {
+                    semMassa++;
+                }
+                
+                pizzaIngredientes.push(Ingrediente($(atual).attr('ingrediente-nome'), $(atual).val()));
+
+                return anterior + parseFloat($(atual).val() || 0);
+            }, 0.00);
+            debugger;
+            if (!massaSelecionada(semMassa)) {
+                return;
+            };
+
+            let pedido = JSON.parse(window.sessionStorage.getItem('Pedido'));
+
+            // ja existe pedido
+            if (pedido && pedido.pizzas.length > 0) {
+                // adiciona pizza
+                pedido.pizzas.push(Pizza(pizzaNome, pizzaTotal, pizzaIngredientes));
+
+                const total = calculaValorTotal(pedido.pizzas);
+
+                pedido.total = total.toFixed(2);
+                $('#carrinho-totalpedido').text(total.toFixed(2));
+
+                window.sessionStorage.setItem('Pedido', JSON.stringify(pedido));
+
+            } else {
+                // cria novo pedido
+                const pizza = Pizza(pizzaNome, pizzaTotal, pizzaIngredientes);
+                pedido = Pedido([pizza], pizzaTotal);
+
+                const total = calculaValorTotal(pedido.pizzas);
+
+                pedido.total = total.toFixed(2);
+                $('#carrinho-totalpedido').text(total.toFixed(2));
+
+                window.sessionStorage.setItem('Pedido', JSON.stringify(pedido));
+            }
+
+            renderizaCarrinho(pedido.pizzas);
+
+            setaIngredientes($('.' + pizzaNome + '-ingredientes').find('input[type="checkbox"]:not(:checked)'));
+            limpaIngredientesAdicionais($('.' + pizzaNome + '-ingredientes-adicionais').find('input:checked'));
+        });
+
+
+        $('.carrinho-finalizar').on("click", function () {
+            $.ajax({
+                    method: "POST",
+                    url: "@Url.Action("FinalizarCompra", "Pedido")",
+                    data: {
+                        pedido: window.sessionStorage.getItem('Pedido')
+                    }
+                })
+                .done(function (obj) {
+                    window.sessionStorage.setItem('PedidoConfirmado', JSON.stringify(obj.pedido))
+                    window.location = '@Url.Action("Confirmacao", "Pedido")';
+                })
+                .fail(function(obj) {
+                    swal({
+                        type: 'error',
+                        title: 'Oops...',
+                        text: 'Algo de errado não está certo!',
+                        footer: JSON.parse(obj.responseText).erro,
+                    });
+                });
+        });
+
+
+        $(function() {
+            const pedido = JSON.parse(window.sessionStorage.getItem('Pedido'));
+
+            if (pedido && pedido.pizzas.length > 0) {
+                const total = calculaValorTotal(pedido.pizzas);
+                $('#carrinho-totalpedido').text(total.toFixed(2));
+
+                renderizaCarrinho(pedido.pizzas);
+            }
+        });
+    </script>
+
+    <script src="/Scripts/sweetalert2.all.min.js"></script>
+}

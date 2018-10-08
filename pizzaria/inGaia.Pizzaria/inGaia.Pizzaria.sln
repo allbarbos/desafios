@@ -1,0 +1,63 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26430.16
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "01 - Presentation", "01 - Presentation", "{E096AC66-9B5B-4A56-8594-85305E3EE8A6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "inGaia.Pizzaria.Site", "inGaia.Pizzaria.Site\inGaia.Pizzaria.Site.csproj", "{A6A94CF8-E491-4055-9E8D-279A3B74E061}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "03 - Domain", "03 - Domain", "{5B23B4D4-73A8-4488-BF3E-D0620FD163E5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "inGaia.Pizzaria.Domain", "inGaia.Pizzaria.Domain\inGaia.Pizzaria.Domain.csproj", "{441B52E7-081E-4478-95BA-A2BE4C4E8473}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "02 - Application", "02 - Application", "{217250E1-A41F-4305-A1D3-1218B8D08654}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "inGaia.Pizzaria.Application", "inGaia.Pizzaria.Application\inGaia.Pizzaria.Application.csproj", "{4F19114E-BB8A-4096-BC9D-1D261B140139}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "04 - CrossCutting", "04 - CrossCutting", "{C236F1B8-DD2A-4253-83F3-7EDD597BA07B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "inGaia.Pizzaria.IoC", "inGaia.Pizzaria.IoC\inGaia.Pizzaria.IoC.csproj", "{0F6453EC-50F4-4573-8EC9-1A00D1096E8E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "05 - Tests", "05 - Tests", "{8A1F72BB-C84A-421B-BF41-54D9FCB09798}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "inGaia.Pizzaria.Domain.Tests", "inGaia.Pizzaria.Domain.Tests\inGaia.Pizzaria.Domain.Tests.csproj", "{6445FE68-B587-4334-8153-7A8996CF9C99}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A6A94CF8-E491-4055-9E8D-279A3B74E061}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A6A94CF8-E491-4055-9E8D-279A3B74E061}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A6A94CF8-E491-4055-9E8D-279A3B74E061}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A6A94CF8-E491-4055-9E8D-279A3B74E061}.Release|Any CPU.Build.0 = Release|Any CPU
+		{441B52E7-081E-4478-95BA-A2BE4C4E8473}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{441B52E7-081E-4478-95BA-A2BE4C4E8473}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{441B52E7-081E-4478-95BA-A2BE4C4E8473}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{441B52E7-081E-4478-95BA-A2BE4C4E8473}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4F19114E-BB8A-4096-BC9D-1D261B140139}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4F19114E-BB8A-4096-BC9D-1D261B140139}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4F19114E-BB8A-4096-BC9D-1D261B140139}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4F19114E-BB8A-4096-BC9D-1D261B140139}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0F6453EC-50F4-4573-8EC9-1A00D1096E8E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0F6453EC-50F4-4573-8EC9-1A00D1096E8E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0F6453EC-50F4-4573-8EC9-1A00D1096E8E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0F6453EC-50F4-4573-8EC9-1A00D1096E8E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6445FE68-B587-4334-8153-7A8996CF9C99}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6445FE68-B587-4334-8153-7A8996CF9C99}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6445FE68-B587-4334-8153-7A8996CF9C99}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6445FE68-B587-4334-8153-7A8996CF9C99}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{A6A94CF8-E491-4055-9E8D-279A3B74E061} = {E096AC66-9B5B-4A56-8594-85305E3EE8A6}
+		{441B52E7-081E-4478-95BA-A2BE4C4E8473} = {5B23B4D4-73A8-4488-BF3E-D0620FD163E5}
+		{4F19114E-BB8A-4096-BC9D-1D261B140139} = {217250E1-A41F-4305-A1D3-1218B8D08654}
+		{0F6453EC-50F4-4573-8EC9-1A00D1096E8E} = {C236F1B8-DD2A-4253-83F3-7EDD597BA07B}
+		{6445FE68-B587-4334-8153-7A8996CF9C99} = {8A1F72BB-C84A-421B-BF41-54D9FCB09798}
+	EndGlobalSection
+EndGlobal
