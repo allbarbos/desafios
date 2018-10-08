@@ -50,24 +50,24 @@ Existe uma exceção à regra para o cálculo de preço, quando a pizza pertence
 
 ### CRITÉRIOS DE APRESENTAÇÃO DO PROJETO
 
-O projeto deve ser entregue atendendo aos seguintes critérios
-O server-side deve ser desenvolvido em C# (.NET) ou Javascript (NodeJS).
-O client-side deve ser desenvolvido em HTML e JavaScript.
-Deve possuir cobertura de testes automatizados para os seguintes pontos: Valor das pizzas do cardápio, regra para cálculo de preço e promoções.
-Não é necessário se preocupar com a autenticação dos usuários.
-Não é necessário persistir os dados em um banco, pode fazer armazenamento em memória.
+O projeto deve ser entregue atendendo aos seguintes critérios;  
+O server-side deve ser desenvolvido em C# (.NET) ou Javascript (NodeJS);  
+O client-side deve ser desenvolvido em HTML e JavaScript;  
+Deve possuir cobertura de testes automatizados para os seguintes pontos: Valor das pizzas do cardápio, regra para cálculo de preço e promoções;  
+Não é necessário se preocupar com a autenticação dos usuários;  
+Não é necessário persistir os dados em um banco, pode fazer armazenamento em memória;  
 
 ### ENTREGÁVEIS
 
 Você deve entregar o projeto de acordo com os requisitos mínimos. O diferencial não é obrigatória a entrega.
 
 #### Mínimo
-Implementação dos requisitos;
-Instruções para executar.
-Relatório de justificativas para escolha do design de código;
-Instruções para executar;
+Implementação dos requisitos;  
+Instruções para executar;  
+Relatório de justificativas para escolha do design de código;  
+Instruções para executar;  
 
 #### Diferencial
-Os testes automatizados devem ser executados por algum modelo de integração contínua;
-O ambiente de execução da aplicação deve possuir um HTTP Proxying com nginx, redirecimendo as requisições da porta 80 para o server-side.
+Os testes automatizados devem ser executados por algum modelo de integração contínua;  
+O ambiente de execução da aplicação deve possuir um HTTP Proxying com nginx, redirecimendo as requisições da porta 80 para o server-side;  
 Ambiente virtualizado em Docker com scripts para execução do projeto.
