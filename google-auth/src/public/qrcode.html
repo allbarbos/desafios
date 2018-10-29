@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  
+  <title>QR Code</title>
+  
+  <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <h1>QR Code generator</h1>
+            <p>Abra o aplicativo Google Authenticator e leia o QR Code gerado abaixo.</p>
+        </div>
+
+        <div class="row">
+            <form class="col-md-4">
+                <div class="form-group">
+                    <label for="secret">Secret (base32)</label>
+                    <input type="text" class="form-control" id="secret" required value="ONSW443FMRUWC">
+                </div>
+
+                <div class="form-group">
+                    <label for="email">E-mail</label>
+                    <input id="email" type="email" class="form-control" required placeholder="Digite seu e-mail">
+                </div>
+
+                <button type="submit" class="btn btn-primary">Gerar QR Code!</button>
+            </form>
+        </div>
+
+        <br><br>
+
+        <div class="row">
+            <div id="qrcode" class="form-group hidden">
+                <label>QR Code</label>
+                <div class="input">
+                    <img id="qrImg" src="" />
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
+    <script>
+        function qrCode(email, secret) {
+            $('#qrImg').attr('src', 'https://chart.googleapis.com/chart?chs=200x200&cht=qr&chl=200x200&chld=M|0&cht=qr&chl=otpauth://totp/'+ email +'%3Fsecret%3D' + secret);
+
+            $('#qrcode').removeClass('hidden')
+        }
+
+        $( "form" ).submit(function( event ) {
+            event.preventDefault();
+
+            var secret = $('#secret').val();
+            var email = $('#email').val();
+
+            qrCode(email, secret);
+        });
+    </script>
+</body>
+</html>

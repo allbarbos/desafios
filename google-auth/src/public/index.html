@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="google-signin-client_id" content="753746880883-33spqee7ebgkgm5pflbs9rhtbjncevrl.apps.googleusercontent.com">
+    
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <script src="js/jquery.js"></script>
+     
+    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+
+    <style type="text/css">
+      @import url(http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,600,700,400);
+ 
+      body {
+        margin: 0;
+        padding: 10%;
+        text-align: center;
+        font-family: 'Open Sans';
+        background: #F8F8F8;
+      }
+ 
+      .user {
+          padding: 50px 20px;
+          background: #FFFFFF;
+          border-radius: 2px;
+          box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+          width: 330px;
+          display: block;
+          margin: 0 auto;
+      }
+ 
+      #user-photo {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        display: block;
+        margin: 0 auto 10px auto;
+      }
+ 
+      h1 {
+        display: block;
+        margin: 0 auto;
+        text-align: center;
+        font-weight: lighter;
+      }
+ 
+      #user-name {
+        color: #0066AA;
+        font-weight: bold;
+      }
+ 
+      #user-email {
+        display: block;
+        margin: 0 auto;
+        text-align: center;
+        color: #0066AA;
+      }
+ 
+      .g-signin2,
+      .g-signin2 .abcRioButton {
+        display: block;
+        margin: 20px auto 0 auto;
+        text-align: center;
+      }
+    </style>
+  </head>   
+  <body>
+    <div class="user">
+      <img id="user-photo" src="https://mariovalney.com/wp-content/uploads/2015/06/user-anonimo.jpg">
+      <h1>Olá, <span id="user-name">visitante</span>!</h1>
+      <p id="user-email"></p>
+
+      <div id="logout" class="hidden" style="margin-top: 2rem;">
+        <a class="btn btn-danger" href="#" onclick="signOut();">Sign out</a>
+      </div>
+    </div>
+
+    <div id="2fa" class="hidden" style="margin-top: 3rem;">
+      <div class="form-group col-sm-offset-4 col-sm-4">
+        <label for="2fa-code">Digite o código:</label>
+        <input id="2fa-code" type="text" class="form-control" placeholder="Código">
+      </div>
+
+      <div class="form-group col-sm-offset-4 col-sm-4">
+        <button id="2fa-validar" class="btn btn-success">Validar</button>
+      </div>
+      
+    </div>
+    
+    <div id="login" class="g-signin2" data-onsuccess="onSignIn" data-theme="dark" data-width="370" data-height="50" data-longtitle="true" data-lang="pt-BR">
+    </div>
+
+    <script src="js/sha.js"></script>
+    <script src="js/totp.js"></script>
+    <script src="js/sweetalert2.js"></script>
+    
+    <script>
+      function onSignIn(response) {
+        var perfil = response.getBasicProfile();
+        var userName = perfil.getName();
+        var userEmail = perfil.getEmail();
+        var userPicture = perfil.getImageUrl();
+
+        $('#user-photo').attr("src", userPicture);
+        $('#user-name').text(userName);
+        $('#user-email').text(userEmail);
+
+        $('#login').addClass('hidden');
+        $('#2fa').removeClass('hidden');
+        $('#logout').removeClass('hidden');
+      };
+
+      function signOut() {
+        var auth2 = gapi.auth2.getAuthInstance();
+        auth2.signOut().then(function () {
+          console.log('User signed out.');
+        });
+
+        window.location = "/";
+      }
+
+      $('#2fa-validar').on('click', function() {
+        var code = $('#2fa-code').val()
+        var totp = new TOTP();
+        if(totp.validate(code)) {
+          swal({
+            title: 'woow, seu código está válido!',
+            type: 'success',
+            width: 600,
+            padding: '3em',
+            backdrop: 'rgba(0,0,123,0.4) url("/images/nyan-cat.gif") center left no-repeat'
+          })
+        }
+        else { 
+          swal({
+            type: 'error',
+            title: 'Oops...',
+            text: 'Código inválido!'
+          })
+        }
+      })
+    </script>
+  </body>
+</html>
