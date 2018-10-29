@@ -53,12 +53,10 @@ TOTP = function() {
             
             var hmac = shaObj.getHMAC("HEX");
             var offset;
-            // hmacObj = new jsSHA(time, "HEX")  # Dependency on sha.js
-            // hmac = hmacObj.getHMAC(key, "HEX", "SHA-1", "HEX")
+            
             if (hmac === "KEY MUST BE IN BYTE INCREMENTS") {
                 throw "Error: hex key must be in byte increments";
             } else {
-                // return null
                 offset = hex2dec(hmac.substring(hmac.length - 1));
             }
             
@@ -76,7 +74,8 @@ TOTP = function() {
     };
 
     this.validate = function(userCode) {
-        var _code = this.getOTP("ONSW443FMRUWC")
+        var secret = "ONSW443FMRUWC";
+        var _code = this.getOTP(secret)
 
         return _code == userCode;
     }
