@@ -12,3 +12,9 @@ O cliente solicita que autenticação de uma determinada API seja realizada co
 4. Para Java:  
   a. Não usar biblioteca de terceiros, exceto se embutir os binários no classpath. Não ter dependencia com external jars.  
   b. Empacotar no formato JAR  
+
+### Subir servidor web
+Abra o terminal, execute ***docker-compose up --build*** e acesse ***http://localhost:8080***
+
+### Gerar QR Code
+Acesse ***http://localhost:8080/qrcode***, digite seu e-mail e gere o QR Code.
