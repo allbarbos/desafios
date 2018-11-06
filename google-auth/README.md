@@ -9,7 +9,7 @@ O cliente solicita que autenticação de uma determinada API seja realizada co
   a. Usar ES5 e rodar no browser  
   b. Não usar código no backend
 
-======
+---
 
 ### Subir servidor web
 Abra o terminal, execute ***docker-compose up --build*** e acesse ***http://localhost:8080***
