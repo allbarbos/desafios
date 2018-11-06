@@ -5,7 +5,7 @@ O cliente solicita que autenticação de uma determinada API seja realizada co
 ### Requisitos:
 
 1. Criar funções para gerar e validar as chaves do Google Authenticator
-2. Implementação em Java ou JavaScript
+2. Implementação em JavaScript
 3. Para JavaScript:  
   a. Usar ES5 e rodar no browser  
   b. Não usar código no backend
