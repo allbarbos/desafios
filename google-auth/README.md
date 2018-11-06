@@ -8,10 +8,7 @@ O cliente solicita que autenticação de uma determinada API seja realizada co
 2. Implementação em Java ou JavaScript
 3. Para JavaScript:  
   a. Usar ES5 e rodar no browser  
-  b. Não usar código no backend  
-4. Para Java:  
-  a. Não usar biblioteca de terceiros, exceto se embutir os binários no classpath. Não ter dependencia com external jars.  
-  b. Empacotar no formato JAR  
+  b. Não usar código no backend
 
 ### Subir servidor web
 Abra o terminal, execute ***docker-compose up --build*** e acesse ***http://localhost:8080***
