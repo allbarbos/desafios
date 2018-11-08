@@ -1,11 +1,10 @@
 ### Crawler
 
-O desafio: encontrar “a resposta”, utilizando um crawler.
+Obter a resposta da página (http://applicant-test.us-east-1.elasticbeanstalk.com) após clicar no botão.
 
-“A resposta” se encontra atrás do clique de um botão, aqui: http://applicant-test.us-east-1.elasticbeanstalk.com/
+Deverá implementar um crawler que emita requisições e leia as respostas, em baixo nível (sem emuladores de browser, como puppeteer, selenium, phantomjs, etc) e o mesmo deve ser capaz de ler a resposta produzida e escrevê-la na tela.
 
-Você deverá fazer um crawler que emita requisições e leia as respostas, em baixo nível (sem emuladores de browser, como puppeteer, selenium, phantomjs, etc). Esse crawler deve ser capaz de ler “a resposta" produzida e escrevê-la na tela.
+---
 
-
-
-### docker-compose up --build
+### Obter resultado esperado
+Abra o terminal, execute ***docker-compose up --build***
