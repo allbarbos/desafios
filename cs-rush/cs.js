@@ -1,74 +1,78 @@
-const cssFactory = (css, vacantCss) => {
-  return css.reduce((anterior, atual) => {
-    if (!vacantCss.includes(atual[0])) {
-      anterior.push({
+const operadoresInit = cssVacantLess => {
+  return cssVacantLess.reduce((anterior, atual) => {
+    const obj = {
+      [atual[0]]: {
         id: atual[0],
         xp: atual[1],
         clientes: []
-      })
+      }
     }
-
-    return anterior
-  }, [])
+    return Object.assign(anterior, obj)
+  }, {})
 }
 
-const customersFactory = customers =>
-  customers.map(atual => ({
-    id: atual[0],
-    xp: atual[1],
-    atendido: false
-  }))
-
-const csOver = cssAvailable =>
-  cssAvailable.reduce((anterior, atual) =>
-    anterior.clientes.length > atual.clientes.length ? anterior : atual
-  )
-
-const csEqual = (cssAvailable, over) => {
-  let igual = false
-
-  cssAvailable.map(atual => {
-    if (
-      over.id !== atual.id &&
-      over.clientes.length === atual.clientes.length
-    ) {
-      igual = true
+const customersInit = customers => {
+  return customers.reduce((anterior, atual) => {
+    const obj = {
+      [atual[0]]: {
+        id: atual[0],
+        xp: atual[1],
+        atendido: false
+      }
     }
+    return Object.assign(anterior, obj)
+  }, {})
+}
+
+const arrayRemove = (arr, value) => {
+  const results = arr.filter(function (elem) {
+    return elem[0] != value
   })
 
-  return igual
+  return results
 }
 
-const distribution = (clients, cssAvailable, maxDistribution) => {
-  clients.map(customer => {
-    cssAvailable.map(func => {
+function csRush (n, m, css, customers, vacant_css) {
+  const cssVacantLess = css.filter(cssItem => {
+    return !vacant_css.includes(cssItem[0]) && cssItem
+  })
+
+  let operadores = operadoresInit(cssVacantLess)
+  let operadoresValues = Object.values(operadores)
+  const clientes = customersInit(customers)
+
+  const qtdOperadores = Object.keys(operadores).length
+  const distribuicao = m / qtdOperadores
+
+  Object.values(clientes).map(customer => {
+    operadoresValues.map(func => {
       if (
         customer.xp <= func.xp &&
         customer.atendido === false &&
-        func.clientes.length <= maxDistribution
+        func.clientes.length <= distribuicao
       ) {
         func.clientes.push(customer)
         customer.atendido = true
       }
     })
   })
-}
 
-const csRush = (n, m, css, customers, vacantCss) => {
-  const clients = customersFactory(customers)
-  const customersTotal = m
+  const maior = operadoresValues.reduce((anterior, atual) => {
+    return anterior.clientes.length > atual.clientes.length ? anterior : atual
+  })
 
-  const cssAvailable = cssFactory(css, vacantCss)
-  const cssTotal = cssAvailable.length
+  let igual = false
 
-  const maxDistribution = customersTotal / cssTotal
+  operadoresValues.reduce((anterior, atual) => {
+    if (
+      maior.id != atual.id &&
+      maior.clientes.length === atual.clientes.length
+    ) {
+      igual = true
+    }
+  })
 
-  distribution(clients, cssAvailable, maxDistribution)
-
-  const over = csOver(cssAvailable)
-  const equal = csEqual(cssAvailable, over)
-
-  return equal ? 0 : over.id
+  return igual ? 0 : maior.id
 }
 
 module.exports = csRush
