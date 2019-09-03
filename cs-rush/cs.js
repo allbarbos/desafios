@@ -12,17 +12,19 @@ const cssFactory = (css, vacantCss) => {
   }, [])
 }
 
-const customersFactory = customers =>
-  customers.map(atual => ({
+const customersFactory = customers => {
+  return customers.map(atual => ({
     id: atual[0],
     xp: atual[1],
     atendido: false
   }))
+}
 
-const csOver = cssAvailable =>
-  cssAvailable.reduce((anterior, atual) =>
+const csOver = cssAvailable => {
+  return cssAvailable.reduce((anterior, atual) =>
     anterior.clientes.length > atual.clientes.length ? anterior : atual
   )
+}
 
 const csEqual = (cssAvailable, over) => {
   let igual = false
